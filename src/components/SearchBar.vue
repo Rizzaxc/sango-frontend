@@ -4,8 +4,8 @@
             <div class="control is-expanded">
                 <input 
                     class="input has-text-black" 
-                    id="kanji-input" type="text" 
-                    placeholder="Enter a Kanji"
+                    id="query-input" type="text" 
+                    placeholder="Search for Kanjis using Writing, Onyomi, Kunyomi, Meaning or Han-Viet"
                     @input="handleInput($event.target.value)"
                     @keyup.enter="lookup()"
                 >
@@ -36,7 +36,7 @@
         props: {},
         data() {
             return {
-                kanji: {
+                query: {
                     type: String,
                     default: ''
                 },
@@ -45,34 +45,32 @@
         },
         methods: {
             handleInput(input) {
-                this.kanji = input
+                this.query = input
             },
 
             async lookup() {
                 // Empty input
                 this.isSearching = true
                 const axios = require('axios').default
-                let backendUrl = "https://fast-mountain-44592.herokuapp.com/"
-                let jishoUrl = encodeURI(backendUrl + "jisho/" + this.kanji)
-                let hanVietUrl = encodeURI(backendUrl + "han-viet/" + this.kanji)
-                document.getElementById("kanji-input").value = null
+                // let backendUrl = "https://fast-mountain-44592.herokuapp.com/search/"
+                let backendUrl = "http://localhost:3000/search/"
 
-                axios.get(jishoUrl).then(jishoResponse => {
-                    let resultBundle = jishoResponse.data
-                    axios.get(hanVietUrl).then(hanVietResponse => {
-                        resultBundle.hanViet = hanVietResponse.data.amHanViet
-                        this.isSearching = false
+                let queryUrl = encodeURI(backendUrl + this.query)
 
-                        this.$root.$emit('newKanjiFetched', resultBundle)
-                    }).catch(error => {
-                        console.log(error)
-                        this.isSearching = false
+                console.log(queryUrl)
 
-                    })
+                document.getElementById("query-input").value = null
+
+                axios.get(queryUrl).then(resultBundle => {
+                    this.isSearching = false
+                    let results = resultBundle.data
+
+
+                    this.$root.$emit('QueryResolved', results)
                 }).catch(error => {
                     console.log(error)
+                    this.$root.$emit('FetchingError')
                     this.isSearching = false
-
                 })
 
             }

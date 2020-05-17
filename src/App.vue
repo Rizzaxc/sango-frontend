@@ -1,19 +1,17 @@
 <template>
   <div id="app">
-    <NavBar />
+    <TheNavBar />
     <div class="columns is-centered">
       <div class="column is-half">
         <SearchBar />
 
 
-        <KanjiCard
-            id="result"
-            v-if="numberOfQueries > 0"
-            :kanji="mostRecent"
-            :showFull="true"/>
+        <SearchResult 
+          v-if="this.results.length > 0"
+          :data="this.results" />
 
         <div class="search-history"
-            v-if="numberOfQueries > 1"
+            v-if="searchHistory.length > 0"
         >
           <KanjiCard
             id="savedQueries"
@@ -28,51 +26,57 @@
 </template>
 
 <script>
-import NavBar from "./components/NavBar.vue";
+import TheNavBar from "./components/TheNavBar.vue";
 import SearchBar from "./components/SearchBar.vue";
+import SearchResult from "./components/SearchResult.vue";
 import KanjiCard from "./components/KanjiCard.vue";
 
 export default {
   name: "App",
   created() {
-    this.$root.$on("newKanjiFetched", this.updateResults);
+    this.$root.$on("QueryResolved", this.updateResults); // Emitted from SearchBar
+    this.$root.$on("FetchingError", this.showFetchingErrorAlert); // Emitted from SearchBar when error occurs
+    this.$root.$on("UpdateHistory", this.updateSearchHistory); // Emitted from SearchResult
+
+    document.title = "Sango - Trilingual Mini Dictionary";
   },
   beforeDestroy() {
-    this.$root.$off("newKanjiFetched", this.updateResults);
+    this.$root.$off("QueryResolved", this.updateResults);
+    this.$root.$off("FetchingError", this.showFetchingErrorAlert);
+    this.$root.$off("UpdateHistory", this.updateSearchHistory);
+
   },
   data() {
     return {
-      allQueries: []
+      searchHistory: [],
+      results: [],
     };
   },
   components: {
-    NavBar,
+    TheNavBar,
     SearchBar,
+    SearchResult,
     KanjiCard
   },
   methods: {
-    updateResults(newKanji) {
-      this.allQueries.unshift(newKanji);
-      if (this.numberOfQueries > 7) {
-          this.allQueries.pop()
+    showFetchingErrorAlert() {
+      //TODO
+    },
+
+    // Input: An array of JavaScript objects
+    updateResults(results) {
+      this.results = results
+    },
+
+    updateSearchHistory(kanji) {
+      this.searchHistory.unshift(kanji) // Push the requested Kanji to the front
+      
+      if (this.searchHistory.length > 6) {
+          this.searchHistory.pop()
       }
     }
   },
   computed: {
-    
-    numberOfQueries() {
-      return this.allQueries.length;
-    },
-    mostRecent() {
-      if (this.numberOfQueries > 0) {
-        return this.allQueries[0];
-      } else {
-        return null;
-      }
-    },
-    searchHistory() {
-        return this.allQueries.slice(1)
-    }
     
   }
 };

@@ -61,7 +61,8 @@
         },
         methods: {
             deleteKanji() {
-
+                this.data.splice(this.currentIndex, 1)
+                this.previousKanji()
             },
 
             previousKanji() {

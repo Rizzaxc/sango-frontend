@@ -12,7 +12,6 @@ new Vue({
 
 /** 
  * TODO:
- *  Add indications when multiple kanjis are returned ==> Page num indication below the button group
  *  Add small Delete button to each KanjiCard; when pressed the card's removed
  *  WK Level OverView
  *  Attach Logo

@@ -5,7 +5,7 @@
             id="result"
             :kanji="currentKanji"
             :showFull="true"/>
-        <div class="column">
+        <div class="button-group column has-text-centered">
             <div class="columns">
                 <div class="column has-text-centered">
                     <p class="heading">Discard</p>
@@ -13,8 +13,6 @@
                         <a @click="deleteKanji()"><i class="fas fa-trash fa-2x"></i></a>
                     </span>
                 </div>
-
-
                 <div class="column has-text-centered">
                     <p class="heading">Save</p>
                     <span class="icon is-large">
@@ -24,14 +22,12 @@
             </div>
 
             <div class="columns">
-
                 <div class="column has-text-centered">
                     <p class="heading">Previous</p>
                     <span class="icon is-large">
                         <a @click="previousKanji()"><i class="fas fa-chevron-circle-left fa-2x"></i></a>
                     </span>
                 </div>
-
                 <div class="column has-text-centered">
                     <p class="heading">Next</p>
                     <span class="icon is-large">
@@ -40,6 +36,10 @@
                 </div>
             </div>
 
+            <div class="page-count">
+                <p class="heading">Current Result</p>
+                <p class="title has-text-weight-bold">{{currentIndex+1}}/{{this.data.length}}</p>
+            </div>
 
         </div>
     </div>

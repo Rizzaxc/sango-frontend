@@ -1,9 +1,9 @@
 <template>
     <nav class="navbar is-success" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a class="navbar-item">
-                SANGO
-            </a>
+            <figure class="image is-64x64">
+                <img src="../assets/logo.svg">
+            </figure>
         </div>
 
         <div class="navbar-menu">

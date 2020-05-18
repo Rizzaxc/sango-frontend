@@ -12,7 +12,5 @@ new Vue({
 
 /** 
  * TODO:
- *  Add small Delete button to each KanjiCard; when pressed the card's removed
  *  WK Level OverView
- *  Attach Logo
  */

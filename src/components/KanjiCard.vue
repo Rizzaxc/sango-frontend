@@ -1,5 +1,6 @@
 <template>
     <div class="card">
+
         <div class="modal" :id="'full-card ' + this.kanji.writing" v-if="showFull === false">
             <div class="modal-background" @click="closeModal()"></div>
             <div class="modal-card">
@@ -14,6 +15,11 @@
             </div>
 
         </div>
+        <button class="delete" 
+            v-if="showFull === false"
+            @click="deleteKanji()">
+
+        </button>
 
         <div class="card-content">
             <div class="columns">
@@ -40,9 +46,12 @@
                     <div class="kunyomi">
                         <KanjiInfo name="Kunyomi" :showFull="this.showFull" :payload="kanji.kunyomi" />
                     </div>
+
                 </div>
             </div>
+            
         </div>
+
     </div>
 </template>
 
@@ -68,6 +77,11 @@
             showFull: {
                 type: Boolean,
                 required: true
+            },
+            index: {
+                type: Number,
+                required: false,
+                default: -1
             }
         },
         methods: {
@@ -81,6 +95,13 @@
                 if (this.showFull === false) {
                     document.getElementById('full-card ' + this.kanji.writing).classList.remove('is-active')
                 }
+            },
+
+            deleteKanji() {
+                if (this.index !== -1) {
+                    this.$root.$emit('DeleteFromHistory', this.index)
+                }
+
             }
         }
     }
@@ -98,5 +119,11 @@
     .card {
         width: 100%;
         margin: 1px;
+    }
+
+    .delete {
+        margin-top: 2px;
+        margin-right: 2px;
+        float: right;
     }
 </style>

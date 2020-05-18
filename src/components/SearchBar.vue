@@ -63,7 +63,6 @@
                     this.isSearching = false
                     let results = resultBundle.data
 
-
                     this.$root.$emit('QueryResolved', results)
                 }).catch(error => {
                     console.log(error)

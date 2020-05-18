@@ -50,6 +50,10 @@
     import KanjiCard from "./KanjiCard.vue";
     export default {
         name: "SearchResult",
+        // Clean up the index from the previous query in case SEGSEV
+        beforeUpdate() {
+            this.currentIndex = 0
+        },
         components: {
             KanjiCard
         },
@@ -83,7 +87,7 @@
 
             saveKanji() {
                 let bundle = this.currentKanji
-                this.$root.$emit('UpdateHistory', bundle)
+                this.$root.$emit('AddToHistory', bundle)
                 this.deleteKanji()
             }
         },

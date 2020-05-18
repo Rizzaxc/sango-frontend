@@ -18,6 +18,7 @@
             v-for="(pastKanji, index) in searchHistory"
             :key="index"
             :kanji="pastKanji"
+            :index="index"
             :showFull="false"/>
         </div>
       </div>
@@ -36,14 +37,16 @@ export default {
   created() {
     this.$root.$on("QueryResolved", this.updateResults); // Emitted from SearchBar
     this.$root.$on("FetchingError", this.showFetchingErrorAlert); // Emitted from SearchBar when error occurs
-    this.$root.$on("UpdateHistory", this.updateSearchHistory); // Emitted from SearchResult
+    this.$root.$on("AddToHistory", this.addToSearchHistory); // Emitted from SearchResult
+    this.$root.$on("DeleteFromHistory", this.deleteFromSearchHistory); // Emitted from KanjiCard
 
     document.title = "Sango - Trilingual Mini Dictionary";
   },
   beforeDestroy() {
     this.$root.$off("QueryResolved", this.updateResults);
     this.$root.$off("FetchingError", this.showFetchingErrorAlert);
-    this.$root.$off("UpdateHistory", this.updateSearchHistory);
+    this.$root.$off("AddToHistory", this.addToSearchHistory);
+    this.$root.$off("DeleteFromHistory", this.deleteFromSearchHistory); 
 
   },
   data() {
@@ -68,12 +71,15 @@ export default {
       this.results = results
     },
 
-    updateSearchHistory(kanji) {
+    addToSearchHistory(kanji) {
       this.searchHistory.unshift(kanji) // Push the requested Kanji to the front
       
       if (this.searchHistory.length > 6) {
           this.searchHistory.pop()
       }
+    },
+    deleteFromSearchHistory(index) {
+      this.searchHistory.splice(index, 1)
     }
   },
   computed: {

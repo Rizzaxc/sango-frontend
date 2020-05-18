@@ -57,8 +57,6 @@
 
                 let queryUrl = encodeURI(backendUrl + this.query)
 
-                console.log(queryUrl)
-
                 document.getElementById("query-input").value = null
 
                 axios.get(queryUrl).then(resultBundle => {

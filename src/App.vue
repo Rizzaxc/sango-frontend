@@ -88,6 +88,11 @@ export default {
 
 }
 
+.searchbar {
+  margin-top: 10%;
+  margin-bottom: 3%;
+}
+
 .search-history {
   display: flex;
   flex-direction: row;

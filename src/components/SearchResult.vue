@@ -6,43 +6,41 @@
             :kanji="currentKanji"
             :showFull="true"/>
         <div class="column">
-            <div class="tile is-ancestor">
-                <div class="tile is-parent">
-                    <div class="tile is-child has-text-centered">
-                        <p class="heading">Discard</p>
-                        <span class="icon is-large">
-                            <a @click="deleteKanji()"><i class="fas fa-trash fa-2x"></i></a>
-                        </span>
-                    </div>
+            <div class="columns">
+                <div class="column has-text-centered">
+                    <p class="heading">Discard</p>
+                    <span class="icon is-large">
+                        <a @click="deleteKanji()"><i class="fas fa-trash fa-2x"></i></a>
+                    </span>
                 </div>
 
-                <div class="tile is-parent">
-                    <div class="tile is-child has-text-centered">
-                        <p class="heading">Previous</p>
-                        <span class="icon is-large">
-                            <a @click="previousKanji()"><i class="fas fa-chevron-circle-left fa-2x"></i></a>
-                        </span> 
-                    </div>
-                </div>
 
-                <div class="tile is-parent">
-                    <div class="tile is-child has-text-centered">
-                        <p class="heading">Next</p>
-                        <span class="icon is-large">
-                            <a @click="nextKanji()"><i class="fas fa-chevron-circle-right fa-2x"></i></a>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="tile is-parent">
-                    <div class="tile is-child has-text-centered">
-                        <p class="heading">Save</p>
-                        <span class="icon is-large">
-                            <a @click="saveKanji()"><i class="fas fa-bookmark fa-2x"></i></a>
-                        </span>
-                    </div>
+                <div class="column has-text-centered">
+                    <p class="heading">Save</p>
+                    <span class="icon is-large">
+                        <a @click="saveKanji()"><i class="fas fa-bookmark fa-2x"></i></a>
+                    </span>
                 </div>
             </div>
+
+            <div class="columns">
+
+                <div class="column has-text-centered">
+                    <p class="heading">Previous</p>
+                    <span class="icon is-large">
+                        <a @click="previousKanji()"><i class="fas fa-chevron-circle-left fa-2x"></i></a>
+                    </span>
+                </div>
+
+                <div class="column has-text-centered">
+                    <p class="heading">Next</p>
+                    <span class="icon is-large">
+                        <a @click="nextKanji()"><i class="fas fa-chevron-circle-right fa-2x"></i></a>
+                    </span>
+                </div>
+            </div>
+
+
         </div>
     </div>
 </template>
@@ -86,7 +84,7 @@
             saveKanji() {
                 let bundle = this.currentKanji
                 this.$root.$emit('UpdateHistory', bundle)
-
+                this.deleteKanji()
             }
         },
         computed: {

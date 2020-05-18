@@ -12,11 +12,8 @@ new Vue({
 
 /** 
  * TODO:
- *  Fix History jumping up when Result empty
- *  Move the buttons to the right of Result in a square
- *  Add indications when multiple kanjis are returned
+ *  Add indications when multiple kanjis are returned ==> Page num indication below the button group
  *  Add small Delete button to each KanjiCard; when pressed the card's removed
  *  WK Level OverView
  *  Attach Logo
- *  Move the search bar down a bit
  */

@@ -52,8 +52,8 @@
                 // Empty input
                 this.isSearching = true
                 const axios = require('axios').default
-                let backendUrl = "https://fast-mountain-44592.herokuapp.com/search/"
-                // let backendUrl = "http://localhost:3000/search/"
+                // let backendUrl = "https://fast-mountain-44592.herokuapp.com/search/"
+                let backendUrl = "http://localhost:3000/search/"
 
                 let queryUrl = encodeURI(backendUrl + this.query)
 

@@ -11,6 +11,9 @@
                 <a class="navbar-item" href="/">
                     <strong>Kanji</strong>
                 </a>
+                <a class="navbar-item">
+                    <strong>WaniKani Level Overview</strong>
+                </a>
             </div>
 
             <div class="navbar-end">

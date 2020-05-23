@@ -21,7 +21,6 @@
             :index="index"
             :showFull="false"/>
         </div>
-        <ErrorAlert class="errorAlert" v-if="showErrorAlert" :errorMessage="errorMessage"/>
       </div>
     </div>
   </div>
@@ -32,7 +31,6 @@ import TheNavBar from "./components/TheNavBar.vue";
 import SearchBar from "./components/SearchBar.vue";
 import SearchResult from "./components/SearchResult.vue";
 import KanjiCard from "./components/KanjiCard.vue";
-import ErrorAlert from "./components/ErrorAlert.vue";
 
 export default {
   name: "App",
@@ -55,44 +53,22 @@ export default {
     return {
       searchHistory: [],
       results: [],
-      showErrorAlert: false,
-      errorMessage: ''
     };
   },
   components: {
     TheNavBar,
     SearchBar,
     SearchResult,
-    KanjiCard,
-    ErrorAlert
+    KanjiCard
   },
   methods: {
     showFetchingErrorAlert() {
-      this.showErrorAlert = true
-      this.errorMessage = "Error while fetching results!"
-      setTimeout(() => {
-        this.showErrorAlert = false
-        this.errorMessage = ''
-      }, 3000)
-    },
-
-    showNoResultAlert() {
-      this.showErrorAlert = true
-      this.errorMessage = "No matching results found!"
-      setTimeout(() => {
-        this.showErrorAlert = false
-        this.errorMessage = ''
-      }, 3000)
+      //TODO
     },
 
     // Input: An array of JavaScript objects
     updateResults(results) {
-      if (results.length == 0) {
-        this.showNoResultAlert()
-      }
-      else {
-        this.results = results
-      }
+      this.results = results
     },
 
     addToSearchHistory(kanji) {
@@ -131,13 +107,5 @@ export default {
   justify-content: space-between;
   height: 80%;
   margin-top: 2px;
-}
-
-.errorAlert {
-  position: fixed;
-  left: 50%;
-  bottom: 20px;
-  transform: translate(-50%, -50%);
-  margin: 0 auto;
 }
 </style>

@@ -53,6 +53,9 @@
         // Clean up the index from the previous query in case SEGSEV
         beforeUpdate() {
             this.currentIndex = 0
+            if (this.currentIndex >= this.totalKanjis) {
+                this.currentIndex = 0
+            }
         },
         components: {
             KanjiCard

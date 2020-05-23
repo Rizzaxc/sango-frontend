@@ -126,4 +126,8 @@
         margin-right: 2px;
         float: right;
     }
+
+    #kanji-writing {
+        font-size: larger;
+    }
 </style>

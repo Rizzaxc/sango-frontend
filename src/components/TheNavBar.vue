@@ -14,22 +14,30 @@
             </div>
 
             <div class="navbar-end">
+
                 <div class="modal" id="about-modal">
                     <div class="modal-background" @click="closeModal()"></div>
                     <div class="modal-card">
-                        <header class="modal-card-head">
-                            <p class="modal-card-title">Mini Dictionary for Vietnamese Japanese-learners</p>
-                            <button class="delete" aria-label="close" @click="closeModal()"></button>
-                        </header>
-
-                        <section class="modal-card-body">
-                            Lorem Ipsum                            
-                        </section>
+                        <article class="message is-medium">
+                            <div class="message-header">
+                                <p>Kanji Dictionary for Vietnamese learning English & Japanese</p>
+                                <button class="delete" aria-label="delete" @click="closeModal()"></button>
+                            </div>
+                            <div class="message-body">
+                                This (mini) dictionary includes over 2000 Kanjis with readings in both Japanese and Vietnamese, along with the meanings in English. 
+                                This is useful for Vietnamese learning the other two languages (or speakers of any combination of the three) since association is a lot quicker with Hán Việt, and sometimes the Onyomi readings very closely resemble the Vietnamese counterparts.
+                            </div>
+                        </article>
                     </div>
                 </div>
                 <a class="navbar-item" @click="launchModal()">
-                    About
+                    <strong>About</strong>
                 </a>
+                <div class="navbar-item">
+                    <a id="github" href="https://github.com/Rizzaxc?tab=repositories">
+                        <i class="fab fa-github fa-2x"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
@@ -51,3 +59,9 @@
         }
     }
 </script>
+
+<style scoped>
+    a#github {
+        color: inherit;
+    };
+</style>
